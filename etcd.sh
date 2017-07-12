@@ -2,13 +2,11 @@
 ETCD_NODE_0=etcd-node-0
 ETCD_NODE_1=etcd-node-1
 ETCD_NODE_2=etcd-node-2
-# 创建Docker Machine
-docker-machine create -d virtualbox etcd-node-0
-docker-machine create -d virtualbox etcd-node-1
-docker-machine create -d virtualbox etcd-node-2
 
 for name in $ETCD_NODE_0 $ETCD_NODE_1 $ETCD_NODE_2
 do
+  docker-machine create -d virtualbox $name
+
   eval $(docker-machine env $name)
   docker run \
     -d \
